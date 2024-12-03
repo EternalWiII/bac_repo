@@ -1,0 +1,21 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    password: 'REMOVED_PASSWORD'
+  jpa:
+    generate-ddl: 'true'
+    hibernate:
+      ddl-auto: update
+  application:
+    name: PracticeProject
+  mustache:
+    servlet:
+      expose-request-attributes: 'true'
+  main:
+    allow-circular-references: true
+jwt:
+  secret: REMOVED_JWT
+  lifetime: 30m
