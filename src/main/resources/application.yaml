@@ -4,7 +4,7 @@ spring:
   datasource:
     username: postgres
     url: jdbc:postgresql://localhost:5432/postgres
-    password: 'REMOVED_PASSWORD'
+    password: ${DB_PASSWORD}
   jpa:
     generate-ddl: 'true'
     hibernate:
@@ -17,5 +17,5 @@ spring:
   main:
     allow-circular-references: true
 jwt:
-  secret: REMOVED_JWT
+  secret: ${JWT_SECRET}
   lifetime: 30m
