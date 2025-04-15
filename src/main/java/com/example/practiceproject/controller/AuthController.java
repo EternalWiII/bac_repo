@@ -30,7 +30,18 @@ public class AuthController {
      */
     @PostMapping("/auth")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
-        return ResponseEntity.ok(authService.createAuthToken(authRequest));
+        ResponseEntity<?> responseEntity = authService.createAuthToken(authRequest);
+        System.out.println("Response Entity: " + responseEntity);
+        System.out.println("Response Status Code: " + responseEntity.getStatusCode());
+        System.out.println("Response Body: " + responseEntity.getBody());
+        System.out.println("Response Headers: " + responseEntity.getHeaders());
+        if (responseEntity.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+        if (responseEntity.getStatusCode() == HttpStatus.OK) {
+            return ResponseEntity.ok(responseEntity.getBody());
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the request");
     }
 
     /**
