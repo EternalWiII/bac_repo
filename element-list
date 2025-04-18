@@ -1,0 +1,9 @@
+com.example.practiceproject
+com.example.practiceproject.config
+com.example.practiceproject.controller
+com.example.practiceproject.dto
+com.example.practiceproject.entity
+com.example.practiceproject.exception
+com.example.practiceproject.repository
+com.example.practiceproject.service
+com.example.practiceproject.utils
