@@ -132,4 +132,26 @@ curl -X POST "http://localhost:8080/upload" \
 
 ```
 
+## Code Documentation Guidelines
 
+### Standards
+We use **JavaDoc** to document code and **Springdoc OpenAPI** to automatically generate REST API documentation.
+
+### What to Document
+- All **public methods** and **classes**, especially in the `controller`, `service`, and `repository` layers.
+- REST API methods should include a clear description of parameters, return values, and possible exceptions.
+
+### Tools
+- **JavaDoc** — use `mvn javadoc:javadoc` to generate HTML documentation for the codebase.
+- **Springdoc OpenAPI** — automatically generates REST API documentation available at `http://localhost:8080/swagger-ui.html`.
+
+### JavaDoc Example
+```java
+/**
+ * Uploads a file to the user's cloud storage.
+ *
+ * @param userId ID of the user
+ * @param file Multipart file to upload
+ * @return URL of the uploaded file
+ */
+public String uploadFile(Long userId, MultipartFile file) { ... }
