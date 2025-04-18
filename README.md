@@ -155,3 +155,76 @@ We use **JavaDoc** to document code and **Springdoc OpenAPI** to automatically g
  * @return URL of the uploaded file
  */
 public String uploadFile(Long userId, MultipartFile file) { ... }
+```
+
+## Developer Setup Guide
+
+This section will guide you through setting up the project in a development environment on a freshly installed operating system.
+
+---
+
+### 1. Required Dependencies and Software
+
+Install the following software:
+
+#### System Dependencies:
+- **Git** – version control system
+- **Java 17** – JDK for the backend
+- **PostgreSQL 15+** – database
+- **Maven 3.6+** – for building the Java project
+
+#### Commands for Ubuntu/Debian:
+
+```bash
+sudo apt update
+sudo apt install git openjdk-17-jdk postgresql maven
+```
+
+### Setting up the Development Environment
+1. Clone the repository
+```bash
+https://github.com/EternalWiII/bac_repo
+cd bac_repo
+```
+
+2. Install and Configure Dependencies
+```bash
+cd backend
+mvn clean install
+```
+
+3. Database Setup and Configuration
+Start PostgreSQL (if not already running):
+```bash
+systemctl start postgresql
+```
+
+Create a database and user(or just do from postgres):
+```bash
+sudo -u postgres psql
+CREATE USER clouduser WITH PASSWORD 'cloudpass';
+CREATE DATABASE cloudstorage OWNER clouduser;
+\q
+```
+
+Configure application.yaml:
+```bash
+datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    password: ${DB_PASSWORD}
+
+jwt:
+  secret: ${JWT_SECRET}
+  lifetime: 30m
+```
+4. Run the project
+```bash
+cd bac_repo
+java -jar target/{NAME}.jar
+```
+5. Basic commands and operations:
+Build: mvn clean install
+Tests: mvn test
+Linting: mvn checkstyles:check
+
