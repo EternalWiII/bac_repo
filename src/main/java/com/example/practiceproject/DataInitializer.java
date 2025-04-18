@@ -10,9 +10,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * DataInitializer is a component that initializes the application data on startup.
- * It implements CommandLineRunner to execute code after the Spring application context is loaded.
- * This class specifically sets up default user roles in the database if they do not already exist.
+ * DataInitializer is a component that 
+ * initializes the application data on startup.
+ * It implements CommandLineRunner to execute code after the 
+ * Spring application context is loaded.
+ * This class specifically sets up default user roles in 
+ * the database if they do not already exist.
  */
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -30,11 +33,11 @@ public class DataInitializer implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        List<String> roles = Arrays.asList("ROLE_USER", "ROLE_ADMIN");
+        final List<String> roles = Arrays.asList("ROLE_USER", "ROLE_ADMIN");
 
         for (String roleName : roles) {
             roleRepository.findByName(roleName).orElseGet(() -> {
-                Role role = new Role();
+                final Role role = new Role();
                 role.setName(roleName);
                 return roleRepository.save(role);
             });

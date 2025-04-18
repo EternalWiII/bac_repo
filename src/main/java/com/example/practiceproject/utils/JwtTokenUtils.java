@@ -14,8 +14,10 @@ import java.util.stream.Collectors;
 
 
 /**
- * JwtTokenUtils is a utility class for handling JWT (JSON Web Token) operations.
- * It provides methods for generating tokens, extracting user information, and retrieving roles from tokens.
+ * JwtTokenUtils is a utility class for handling 
+ * JWT (JSON Web Token) operations.
+ * It provides methods for generating tokens, extracting
+ * user information, and retrieving roles from tokens.
  */
 @Component
 public class JwtTokenUtils {
@@ -40,7 +42,9 @@ public class JwtTokenUtils {
         claims.put("roles", authorities);
 
         final Date issuedAt = new Date();
-        final Date expiration = new Date(issuedAt.getTime() + lifetime.toMillis());
+        final Date expiration = new Date(
+            issuedAt.getTime() + lifetime.toMillis()
+            );
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
@@ -74,10 +78,12 @@ public class JwtTokenUtils {
      * Parses the JWT token to extract claims.
      *
      * @param token the JWT token
-     * @return the Claims object containing the claims from the token
+     * @return the Claims object containing the claims 
+     * from the token
      */
     private Claims getClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(secret)
+        .build().parseClaimsJws(token).getBody();
     }
 }
 

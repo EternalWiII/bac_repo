@@ -16,8 +16,10 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 /**
- * CloudStorageService provides functionalities for uploading and downloading files
- * in the cloud storage. It handles file operations while ensuring the user is authenticated
+ * CloudStorageService provides functionalities for 
+ * uploading and downloading files
+ * in the cloud storage. It handles file operations 
+ * while ensuring the user is authenticated
  * via JWT token.
  */
 @Service
@@ -35,7 +37,8 @@ public class CloudStorageService {
      *
      * @param file the MultipartFile to be uploaded
      * @param token the JWT token for authentication
-     * @throws IllegalArgumentException if the file is empty or cannot be uploaded
+     * @throws IllegalArgumentException if the file is empty or
+     * cannot be uploaded
      */
     public void uploadFile(MultipartFile file, String token) {
         try {
@@ -43,16 +46,22 @@ public class CloudStorageService {
                 throw new IllegalArgumentException("File is empty");
             }
 
-            String fileName = file.getOriginalFilename();
+            final String fileName = file.getOriginalFilename();
 
-            String username = jwtTokenUtils.getUsername(token);
+            final String username = jwtTokenUtils.getUsername(token);
 
             try (InputStream inputStream = file.getInputStream()) {
-                Path destinationFile = Paths.get("storage/" + username).resolve(
+                final Path destinationFile = Paths.get(
+                    "storage/" + username
+                ).resolve(
                                 Paths.get(fileName))
                         .normalize().toAbsolutePath();
                 Files.createDirectories(destinationFile.getParent());
-                Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(
+                    inputStream, 
+                    destinationFile, 
+                    StandardCopyOption.REPLACE_EXISTING
+                );
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -71,16 +80,16 @@ public class CloudStorageService {
     public Resource downloadFile(String fileName, String cleanToken) {
         try {
             // Extract the username from the JWT token
-            String username = jwtTokenUtils.getUsername(cleanToken);
+            final String username = jwtTokenUtils.getUsername(cleanToken);
 
             System.out.println(username);
 
             // Use the username in the file path
-            Path filePath = Paths.get("storage/" + username).resolve(
+            final Path filePath = Paths.get("storage/" + username).resolve(
                             Paths.get(fileName))
                     .normalize().toAbsolutePath();
             System.out.println(fileName);
-            Resource resource = new UrlResource(filePath.toUri());
+            final Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists()) {
                 return resource;
             } else {

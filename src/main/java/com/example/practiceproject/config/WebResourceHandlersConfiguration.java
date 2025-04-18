@@ -5,8 +5,10 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * WebResourceHandlersConfiguration configures resource handlers for serving static resources.
- * This configuration allows resources from the specified file system path to be served
+ * WebResourceHandlersConfiguration configures resource handlers for 
+ * serving static resources.
+ * This configuration allows resources from the specified file system
+ * path to be served
  * under the "/storage/**" URL pattern.
  */
 @Configuration

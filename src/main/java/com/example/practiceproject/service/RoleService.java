@@ -6,7 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
- * RoleService provides functionalities for managing user roles in the application.
+ * RoleService provides functionalities for managing user 
+ * roles in the application.
  * It interacts with the RoleRepository to retrieve role information.
  */
 @Service

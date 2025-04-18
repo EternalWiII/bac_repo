@@ -15,12 +15,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.security.SignatureException;
 import java.util.stream.Collectors;
 
 /**
- * JwtRequestFilter is responsible for filtering each incoming request to check if it contains
- * a valid JWT token. If a valid token is present, it sets the authentication in the security context.
+ * JwtRequestFilter is responsible for filtering each
+ * incoming request to check if it contains
+ * a valid JWT token. If a valid token is present, it 
+ * sets the authentication in the security context.
  */
 @Component
 @RequiredArgsConstructor
@@ -29,18 +30,25 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtTokenUtils jwtTokenUtils;
 
     /**
-     * Filters each request, extracts the JWT token (if present), and sets the authentication
-     * in the security context if the token is valid and the user is not yet authenticated.
+     * Filters each request, extracts the JWT token (if present),
+     * and sets the authentication
+     * in the security context if the token is valid and the
+     * user is not yet authenticated.
      *
      * @param request the HttpServletRequest
      * @param response the HttpServletResponse
-     * @param filterChain the FilterChain to allow further processing of the request
+     * @param filterChain the FilterChain to allow further processing 
+     * of the request
      * @throws ServletException in case of servlet-specific errors
      * @throws IOException in case of IO-related errors
      */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authHeader = request.getHeader("Authorization");
+    protected void doFilterInternal(
+        HttpServletRequest request, 
+        HttpServletResponse response, 
+        FilterChain filterChain) throws ServletException, IOException 
+        {
+        final String authHeader = request.getHeader("Authorization");
         String username = null;
         String jwtToken = null;
 
@@ -56,8 +64,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
 
-        if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                     username,
                     null,
                     jwtTokenUtils.getRoles(jwtToken).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())

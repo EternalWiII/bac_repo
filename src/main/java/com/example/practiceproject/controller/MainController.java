@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     /**
-     * Handles GET requests to the root URL ("/") and returns the view name for the home page.
+     * Handles GET requests to the root URL ("/") and
+     * returns the view name for the home page.
      *
      * @return the name of the home view
      */
@@ -21,7 +22,8 @@ public class MainController {
     }
 
     /**
-     * Handles GET requests to the "/registration" URL and returns the view name for the registration page.
+     * Handles GET requests to the "/registration" URL and returns the view
+     * name for the registration page.
      *
      * @return the name of the registration view
      */
@@ -31,7 +33,8 @@ public class MainController {
     }
 
     /**
-     * Handles GET requests to the "/login" URL and returns the view name for the login page.
+     * Handles GET requests to the "/login" URL 
+     * and returns the view name for the login page.
      *
      * @return the name of the login view
      */

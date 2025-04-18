@@ -2,17 +2,14 @@ package com.example.practiceproject.service;
 
 import com.example.practiceproject.dto.RegistrationUserDto;
 import com.example.practiceproject.entity.User;
-import com.example.practiceproject.repository.RoleRepository;
 import com.example.practiceproject.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +18,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * CustomUserDetailsService implements the UserDetailsService interface to provide
- * custom user authentication details for Spring Security. It manages user retrieval
- * and user creation logic, integrating with the UserRepository and RoleService.
+ * CustomUserDetailsService implements the
+ * UserDetailsService interface to provide
+ * custom user authentication details for 
+ * Spring Security. It manages user retrieval
+ * and user creation logic, integrating with 
+ * the UserRepository and RoleService.
  */
 @Getter
 @Service
@@ -66,15 +66,19 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
+    public UserDetails loadUserByUsername(String username) 
+        throws UsernameNotFoundException {
+        final User user = findByUsername(username).orElseThrow(() 
+            -> new UsernameNotFoundException(
                 String.format("User %s not found", username)
         ));
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList())
+                user.getRoles().stream().map(
+                    role -> new SimpleGrantedAuthority(role.getName())
+                ).collect(Collectors.toList())
         );
     }
 
@@ -85,9 +89,11 @@ public class CustomUserDetailsService implements UserDetailsService {
      * @return the newly created User entity
      */
     public User createNewUser(RegistrationUserDto registrationUserDto) {
-        User user = new User();
+        final User user = new User();
         user.setUsername(registrationUserDto.getUsername());
-        user.setPassword(passwordEncoder.encode(registrationUserDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(
+            registrationUserDto.getPassword())
+        );
         user.setEmail(registrationUserDto.getEmail());
         user.setRoles(List.of(roleService.getRole()));
         return userRepository.save(user);

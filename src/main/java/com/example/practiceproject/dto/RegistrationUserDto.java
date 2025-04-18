@@ -1,10 +1,8 @@
 package com.example.practiceproject.dto;
 
-import com.example.practiceproject.entity.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Collection;
 
 /**
  * RegistrationUserDto is a Data Transfer Object (DTO) that contains

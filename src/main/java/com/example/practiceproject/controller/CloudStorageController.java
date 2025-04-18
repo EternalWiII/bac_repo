@@ -11,8 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
 /**
- * CloudStorageController handles file upload and download requests to the cloud storage.
- * It manages file operations while ensuring the request contains a valid authorization token.
+ * CloudStorageController handles file upload
+ *  and download requests to the cloud storage.
+ * It manages file operations while ensuring 
+ * the request contains a valid authorization token.
  */
 @RestController
 public class CloudStorageController {
@@ -28,16 +30,19 @@ public class CloudStorageController {
      *
      * @param filename the name of the file to download
      * @param token the Authorization token from the request header
-     * @return a ResponseEntity containing the file resource, or a 404 status if the file is not found
+     * @return a ResponseEntity containing the file resource, or a 
+     * 404 status if the file is not found
      */
     @GetMapping("/download/{filename:.+}")
     public ResponseEntity<Resource> download(@PathVariable String filename,
-                                             @RequestHeader("Authorization") String token) {
+        @RequestHeader("Authorization") String token) {
         // Remove "Bearer " prefix from the token
-        String cleanToken = token.substring(7);
+        final String cleanToken = token.substring(7);
 
         // Pass the token to the service
-        Resource file = cloudStorageService.downloadFile(filename, cleanToken);
+        final Resource file = cloudStorageService.downloadFile(
+            filename, cleanToken
+            );
 
         if (file == null) {
             return ResponseEntity.notFound().build();
@@ -54,14 +59,17 @@ public class CloudStorageController {
      *
      * @param file the file to be uploaded
      * @param token the Authorization token from the request header
-     * @return a ResponseEntity with a success message if the file is uploaded successfully
+     * @return a ResponseEntity with a success message 
+     * if the file is uploaded successfully
      */
     @PostMapping("/upload")
     public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file,
-                                    @RequestHeader("Authorization") String token) {
-        String cleanToken = token.substring(7);
+        @RequestHeader("Authorization") String token) {
+        final String cleanToken = token.substring(7);
 
         cloudStorageService.uploadFile(file, cleanToken);
-        return ResponseEntity.ok(Map.of("message", "File uploaded successfully"));
+        return ResponseEntity.ok(Map.of(
+            "message", "File uploaded successfully"
+            ));
     }
 }

@@ -5,7 +5,8 @@ import lombok.Data;
 
 /**
  * Role represents an entity that defines a user role in the application.
- * It is mapped to the "roles" table in the database and contains the role's ID and name.
+ * It is mapped to the "roles" table in the database and contains the
+ * role's ID and name.
  */
 @Entity
 @Data
