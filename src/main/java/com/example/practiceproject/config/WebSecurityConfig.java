@@ -19,8 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 /**
- * WebSecurityConfig configures the security for the application
- * using Spring Security.
+ * WebSecurityConfig configures the security for the 
+ * application using Spring Security.
  * It sets up custom user details service, JWT filter, 
  * and various security configurations
  * such as CORS, CSRF, session management, and URL access permissions.
