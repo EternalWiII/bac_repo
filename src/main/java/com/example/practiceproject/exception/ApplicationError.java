@@ -6,7 +6,8 @@ import java.util.Date;
 
 /**
  * ApplicationError represents an error response in the application.
- * It contains information about the error status, message, and timestamp of the error occurrence.
+ * It contains information about the error status, message, and 
+ * timestamp of the error occurrence.
  */
 @Data
 public class ApplicationError {

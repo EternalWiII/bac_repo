@@ -32,15 +32,15 @@ public class JwtTokenUtils {
      * @return a String representing the generated JWT token
      */
     public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        List<String> authorities = userDetails.getAuthorities()
+        final Map<String, Object> claims = new HashMap<>();
+        final List<String> authorities = userDetails.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
         claims.put("roles", authorities);
 
-        Date issuedAt = new Date();
-        Date expiration = new Date(issuedAt.getTime() + lifetime.toMillis());
+        final Date issuedAt = new Date();
+        final Date expiration = new Date(issuedAt.getTime() + lifetime.toMillis());
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
